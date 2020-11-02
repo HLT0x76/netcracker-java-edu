@@ -19,8 +19,6 @@ public class CustomerTest {
     public void setData() {
         this.id += 1;
         this.dob = dob.plusYears(1);
-
-
     }
 
     @Test
