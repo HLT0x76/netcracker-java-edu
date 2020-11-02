@@ -11,10 +11,9 @@ public class CustomerTest {
 
     private int id = 0;
     private LocalDate dob = LocalDate.of(1937, 7, 18);
-    private static final String firstName = "Hunter";
-    private static final String secondName = "Thompson";
-    private static final String middleName = "Stockton";
-    private static final String passport = "6010223415";
+    private static final String fullName = "Hunter Stockton Thompson";
+    private static final String passport = "6010-223415";
+    private static final Gender gender = Gender.MALE;
 
     @BeforeEach
     public void setData() {
@@ -29,7 +28,12 @@ public class CustomerTest {
         LocalDate now = LocalDate.now();
         ContractTelevision con = new ContractTelevision(now, now.plusYears(1), "Ultra");
         int age = now.getYear() - dob.getYear();
-        Customer c = new Customer(id, dob, firstName, secondName, middleName, passport, con);
+        Customer c = new Customer(id,
+                dob,
+                gender,
+                fullName,
+                passport,
+                con);
 
         assertEquals(age, c.getAge());
     }
