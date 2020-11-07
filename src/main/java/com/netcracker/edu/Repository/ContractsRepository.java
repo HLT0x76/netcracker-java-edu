@@ -1,55 +1,55 @@
 package com.netcracker.edu.Repository;
 
 import java.util.Arrays;
+import java.util.Objects;
+
 import com.netcracker.edu.Contracts.Contract;
 import lombok.AccessLevel;
 import lombok.Getter;
 
 public class ContractsRepository {
 
-    private static final int INIT_SIZE = 3;
-    @Getter(AccessLevel.PROTECTED) Contract[] contracts = new Contract[INIT_SIZE];
-    private int currentIndex = INIT_SIZE - 1;
+    private static final int INIT_SIZE = 1;
+    private int currentIndex = 0;
+    @Getter(AccessLevel.PROTECTED) private Contract[] contracts = null;
 
     /**
      * add method for ContractArray
-     * which is scanning {@code contracts} for null values
-     * to replace them with {@code Contract con} object and
-     * managing array extension.
-     *
-     * O(n) - worst case due to null value replacing.
+     * that's adding {@code con} to a {@code contracts}
+     * and manages array extension.
      *
      * @param con contract object
      */
     public void add(Contract con) {
-        int currentSize = this.contracts.length;
-        for (int i = 0; i < currentSize; i++) {
-            if (this.contracts[i] == null) {
-                this.contracts[i] = con;
-                return;
-            }
+        if (Objects.isNull(contracts)) {
+            contracts = new Contract[INIT_SIZE];
         }
-        if (this.currentIndex == this.contracts.length - 1) {
-            int newSize = this.contracts.length + 1;
-            this.contracts = Arrays.copyOf(this.contracts, newSize);
+        int currentSize = contracts.length;
+        if (currentIndex == currentSize) {
+            int newSize = currentSize + 1;
+            contracts = Arrays.copyOf(contracts, newSize);
         }
-        this.currentIndex += 1;
-        this.contracts[this.currentIndex] = con;
+        contracts[currentIndex] = con;
+        currentIndex += 1;
     }
 
     /**
      * delete method for ContractArrays
-     * which changes Contract con with con.getId() == id to null.
-     *
-     * O(n) - worst case (if con with con.getId() == id at -1 index).
+     * which changes Contract by shifting array left
      *
      * @param id contract ID
      */
     public void delete(int id) {
-        int currentLength = this.contracts.length;
+        int currentLength = contracts.length;
         for (int i = 0; i < currentLength; i++) {
             if (contracts[i].getId() == id) {
-                this.contracts[i] = null;
+                System.arraycopy(contracts,
+                        i + 1,
+                        contracts,
+                        i,
+                        currentLength - 1 - i);
+                contracts = Arrays.copyOf(contracts, currentLength - 1);
+                currentIndex -= 1;
                 break;
             }
         }
@@ -58,14 +58,12 @@ public class ContractsRepository {
     /**
      * get method for ContractArrays.
      *
-     * O(n) - worst case (if con with con.getId() == id at -1 index).
-     *
      * @param id ID of a contract object
      * @return contract object if found, else null
      */
     public Contract get(int id) {
-        for (Contract con : this.contracts) {
-            if ((con != null) && (con.getId() == id)) {
+        for (Contract con : contracts) {
+            if (con.getId() == id) {
                 return con;
             }
         }
