@@ -35,7 +35,7 @@ public class ContractsRepository {
 
     /**
      * delete method for ContractArrays
-     * which changes Contract by shifting array left
+     * which modifies the array - "shifts" it by one if needed
      *
      * @param id contract ID
      */
