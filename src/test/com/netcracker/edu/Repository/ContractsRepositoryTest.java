@@ -56,9 +56,9 @@ public class ContractsRepositoryTest {
         repo.add(conInt);
         repo.add(conTv);
         repo.add(conMob);
-        int conId = conTv.getId();
-        repo.delete(conId);
-        Contract expected = repo.get(conId);
+        int conTvId = conTv.getId();
+        repo.delete(conTvId);
+        Contract expected = repo.get(conTvId);
         Contract actual = null;
         assertEquals(expected, actual);
     }
@@ -68,8 +68,8 @@ public class ContractsRepositoryTest {
         repo.add(conInt);
         repo.add(conTv);
         repo.add(conMob);
-        Contract expected = repo.get(conTv.getId());
-        Contract actual = conTv;
+        Contract expected = repo.get(conMob.getId());
+        Contract actual = conMob;
         assertEquals(expected, actual);
     }
 
