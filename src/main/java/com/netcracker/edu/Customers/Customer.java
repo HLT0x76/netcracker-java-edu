@@ -12,7 +12,6 @@ import lombok.AccessLevel;
 public class Customer {
 
     private final int id;
-    private final int age;
     private Gender gender;
     private int nextId = 0;
     private LocalDate dateOfBirth;
@@ -22,7 +21,7 @@ public class Customer {
 
     /**
      * This class provides basic Customer functionality
-     *  @param id ID field
+     * @param id ID field
      * @param dateOfBirth the date of birth
      * @param fullName full name of a Costumer
      * @param passport the passport string
@@ -41,15 +40,13 @@ public class Customer {
         this.fullName = fullName;
         this.passport = passport;
         this.contract = contract;
-
-        this.age = this.calculateAge();
     }
 
     /**
      * Calculates customer age from {@code dateOfBirth} field
      * by using {@code LocalDate.getYear()} method
      */
-    private int calculateAge() {
+    public int getAge() {
         int currentYear = LocalDate.now().getYear();
         int dobYear = dateOfBirth.getYear();
         return (currentYear - dobYear);
