@@ -26,4 +26,5 @@ public abstract class Contract {
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
     }
+
 }
