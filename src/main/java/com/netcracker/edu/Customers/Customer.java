@@ -2,6 +2,7 @@ package com.netcracker.edu.Customers;
 
 import com.netcracker.edu.Contracts.Contract;
 import java.time.LocalDate;
+import java.time.Period;
 
 import lombok.Setter;
 import lombok.Getter;
@@ -13,8 +14,8 @@ public class Customer {
 
     private final int id;
     private Gender gender;
-    private int nextId = 0;
     private LocalDate dateOfBirth;
+    private final int age;
     private String fullName;
     private String passport;
     private Contract contract;
@@ -40,16 +41,8 @@ public class Customer {
         this.fullName = fullName;
         this.passport = passport;
         this.contract = contract;
+        this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
-    /**
-     * Calculates customer age from {@code dateOfBirth} field
-     * by using {@code LocalDate.getYear()} method
-     */
-    public int getAge() {
-        int currentYear = LocalDate.now().getYear();
-        int dobYear = dateOfBirth.getYear();
-        return (currentYear - dobYear);
-    }
 }
 
