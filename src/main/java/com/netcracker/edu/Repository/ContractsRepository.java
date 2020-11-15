@@ -1,9 +1,6 @@
 package com.netcracker.edu.Repository;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 
 import com.netcracker.edu.Contracts.Contract;
@@ -77,14 +74,39 @@ public class ContractsRepository implements IRepository<Contract> {
         return Optional.empty();
     }
 
+    /**
+     * transforms {@code content} array into a list of contracts
+     *
+     * @return list of {@code Contract}'s
+     */
+    @Override
+    public List<Contract> toList() {
+        return Arrays.asList(this.content.clone());
+    }
+
+    /**
+     * allows us sort content of a {@code ContractRepository} using a <p>
+     * {@code Comparator} generic and sorter, which must implement {@link com.netcracker.edu.Sorters.ISorter} interface
+     *
+     * @param sorter sorter, which implements {@link com.netcracker.edu.Sorters.ISorter} interface
+     * @param comparator generic comparator, that will set fields which will be used by sorter
+     */
     @Override
     public void sortBy(ISorter<Contract> sorter, Comparator<Contract> comparator) {
         sorter.sort(this.content, comparator);
     }
 
+    /**
+     * searches content of {@code content} field and filters it using {@code condition} predicate
+     *
+     * @param condition predicate generic
+     * @return new {@code ContractRepository}, which contains filtered by {@code condition} repository field
+     */
     @Override
-    public IRepository<Contract> searchBy(Predicate condition) {
-        return null;
+    public IRepository<Contract> searchBy(Predicate<Contract> condition) {
+        ContractsRepository newRepo = new ContractsRepository();
+        this.toList().stream().filter(condition).forEach(newRepo::add);
+        return newRepo;
     }
 
 }
