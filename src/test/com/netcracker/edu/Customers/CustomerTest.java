@@ -4,6 +4,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.time.Period;
+
 import com.netcracker.edu.Contracts.ContractTelevision;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -23,9 +25,9 @@ public class CustomerTest {
 
     @Test
     public void getAge() {
-        LocalDate now = LocalDate.now();
-        ContractTelevision con = new ContractTelevision(now, now.plusYears(1), "Ultra");
-        int age = now.getYear() - dob.getYear();
+        LocalDate today = LocalDate.now();
+        ContractTelevision con = new ContractTelevision(today, today.plusYears(1), "Ultra");
+        int age = Period.between(dob, today).getYears();
         Customer c = new Customer(id,
                 dob,
                 gender,

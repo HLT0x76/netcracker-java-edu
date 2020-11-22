@@ -1,7 +1,12 @@
 package com.netcracker.edu.Repository;
 
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.function.Predicate;
 
+import com.netcracker.edu.Sorters.BubbleSorter;
+import com.netcracker.edu.Sorters.ISorter;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,7 +20,6 @@ public class ContractsRepositoryTest {
 
     private ContractsRepository repo = null;
     private final LocalDate creation = LocalDate.now();
-    private final LocalDate expiration = creation.plusYears(1);
     private ContractTelevision conTv = null;
     private ContractInternet conInt = null;
     private ContractMobile conMob = null;
@@ -24,15 +28,15 @@ public class ContractsRepositoryTest {
     public void setUp() {
         conInt = new ContractInternet(
                 creation,
-                expiration,
+                creation.plusYears(1),
                 25);
         conTv = new ContractTelevision(
                 creation,
-                expiration.plusYears(1),
+                creation.plusYears(2),
                 "Ultra");
         conMob = new ContractMobile(
                 creation,
-                expiration.plusYears(2),
+                creation.plusYears(3),
                 10,
                 300,
                 2048);
@@ -47,8 +51,9 @@ public class ContractsRepositoryTest {
         repo.add(conTv);
         int cid = conMob.getId();
         Contract expected = conMob;
-        Contract actual = repo.get(cid);
-        assertEquals(expected, actual);
+        Optional<Contract> actual = repo.get(cid);
+        assertTrue(actual.isPresent());
+        assertEquals(expected, actual.get());
     }
 
     @Test
@@ -57,10 +62,13 @@ public class ContractsRepositoryTest {
         repo.add(conTv);
         repo.add(conMob);
         int conTvId = conTv.getId();
+        int conMobId = conTv.getId();
         repo.delete(conTvId);
-        Contract expected = repo.get(conTvId);
-        Contract actual = null;
-        assertEquals(expected, actual);
+        repo.delete(conMobId);
+        Optional<Contract> expectedTv = repo.get(conTvId);
+        assertFalse(expectedTv.isPresent());
+        Optional<Contract> expectedMob = repo.get(conMobId);
+        assertFalse(expectedMob.isPresent());
     }
 
     @Test
@@ -68,9 +76,42 @@ public class ContractsRepositoryTest {
         repo.add(conInt);
         repo.add(conTv);
         repo.add(conMob);
-        Contract expected = repo.get(conMob.getId());
-        Contract actual = conMob;
+        Optional<Contract> actual = repo.get(conMob.getId());
+        Contract expected = conMob;
+        assertTrue(actual.isPresent());
+        assertEquals(expected, actual.get());
+    }
+
+    @Test
+    public void sortBy() {
+        repo.add(conMob);
+        repo.add(conInt);
+        repo.add(conTv);
+        Comparator<Contract> byId =
+                Comparator.comparingInt(Contract::getId);
+        ISorter<Contract> bubbleSorter = new BubbleSorter<>();
+        repo.sortBy(bubbleSorter, byId);
+        Contract[] actual = repo.getContent();
+        Contract[] expected = {conInt, conTv, conMob};
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void searchBy() {
+        repo.add(conInt);
+        repo.add(conTv);
+        repo.add(conMob);
+        repo.add(conTv);
+        repo.add(conInt);
+        repo.add(conMob);
+
+        ContractsRepository expected = new ContractsRepository();
+        expected.add(conInt);
+        expected.add(conInt);
+
+        Predicate<Contract> expireInLessThenTwo =
+                ex -> ex.getExpirationDate().getYear() - ex.getCreationDate().getYear() < 2;
+        ContractsRepository actual = (ContractsRepository) repo.searchBy(expireInLessThenTwo);
+        assertEquals(actual.getContent(), expected.getContent());
+    }
 }
