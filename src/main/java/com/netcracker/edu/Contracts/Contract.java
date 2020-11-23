@@ -7,14 +7,13 @@ import lombok.Setter;
 import lombok.Getter;
 
 @Getter
-@Setter
 public abstract class Contract {
 
     private int id;
-    private static int nextId = 0;
-    private LocalDate creationDate;
-    private LocalDate expirationDate;
-    private Customer contractOwner;
+    @Setter private static int nextId = 0;
+    @Setter private LocalDate creationDate;
+    @Setter private LocalDate expirationDate;
+    @Setter private Customer contractOwner;
 
     /**
      * id field a nextId inner iterator
