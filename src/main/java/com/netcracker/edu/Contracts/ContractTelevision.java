@@ -12,7 +12,7 @@ import lombok.Getter;
  * Television contract (extends {@link Contract})
  */
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class ContractTelevision extends Contract {
 
     private String channelsPacket;

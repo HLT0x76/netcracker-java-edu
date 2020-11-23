@@ -11,7 +11,7 @@ import lombok.Getter;
  * Mobile contract (extends {@link Contract})
  */
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class ContractMobile extends Contract {
 
     private long smsAmount;

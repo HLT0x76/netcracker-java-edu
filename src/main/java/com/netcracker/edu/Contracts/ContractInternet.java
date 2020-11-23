@@ -12,7 +12,7 @@ import lombok.Getter;
  * Internet contract (extends {@link Contract})
  */
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class ContractInternet extends Contract {
 
     private int internetSpeed;

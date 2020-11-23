@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.Getter;
 
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public abstract class Contract {
 
     private int id;
