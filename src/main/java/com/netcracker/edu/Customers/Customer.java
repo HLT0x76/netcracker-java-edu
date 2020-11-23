@@ -13,7 +13,6 @@ import lombok.AccessLevel;
 @Setter(AccessLevel.PROTECTED)
 public class Customer {
 
-
     private final int id;
     private Gender gender;
     private LocalDate dateOfBirth;
