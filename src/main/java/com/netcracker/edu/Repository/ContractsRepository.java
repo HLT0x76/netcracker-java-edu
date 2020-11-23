@@ -62,13 +62,15 @@ public class ContractsRepository implements IRepository<Contract> {
      * get method for ContractArrays.
      *
      * @param index ID of a contract object
-     * @return contract object if found, else null
+     * @return contract object if found, else {@code Optional.empty()}
      */
     @Override
     public Optional<Contract> get(int index) {
-        for (Contract con : content) {
-            if (con.getId() == index) {
-                return Optional.of(con);
+        if (!Objects.isNull(content)) {
+            for (Contract con : content) {
+                if (con.getId() == index) {
+                    return Optional.of(con);
+                }
             }
         }
         return Optional.empty();
@@ -87,8 +89,7 @@ public class ContractsRepository implements IRepository<Contract> {
     /**
      * allows us sort content of a {@code ContractRepository} using a <p>
      * {@code Comparator} generic and sorter, which must implement {@link com.netcracker.edu.Sorters.ISorter} interface
-     *
-     * @param sorter sorter, which implements {@link com.netcracker.edu.Sorters.ISorter} interface
+     * @param sorter sorter, which implements {@link ISorter} interface
      * @param comparator generic comparator, that will set fields which will be used by sorter
      */
     @Override
@@ -107,6 +108,18 @@ public class ContractsRepository implements IRepository<Contract> {
         ContractsRepository newRepo = new ContractsRepository();
         this.toList().stream().filter(condition).forEach(newRepo::add);
         return newRepo;
+    }
+
+
+    /**
+     * @return length of {@code content} field
+     */
+    public int getLength() {
+        if (currentIndex == 0) {
+            return 0;
+        } else {
+            return this.content.length;
+        }
     }
 
 }
