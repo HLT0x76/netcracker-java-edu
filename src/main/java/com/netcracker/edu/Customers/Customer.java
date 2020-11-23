@@ -1,7 +1,5 @@
 package com.netcracker.edu.Customers;
 
-import com.netcracker.edu.Contracts.Contract;
-import com.netcracker.edu.Repository.ContractsRepository;
 import java.time.LocalDate;
 import java.time.Period;
 
