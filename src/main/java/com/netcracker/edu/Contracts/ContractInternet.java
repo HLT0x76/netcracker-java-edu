@@ -3,7 +3,6 @@ package com.netcracker.edu.Contracts;
 import java.time.LocalDate;
 
 import com.netcracker.edu.Customers.Customer;
-import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
 
