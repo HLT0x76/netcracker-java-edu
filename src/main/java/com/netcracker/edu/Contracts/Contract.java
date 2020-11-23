@@ -11,7 +11,7 @@ import lombok.Getter;
 @Setter(AccessLevel.PROTECTED)
 public abstract class Contract {
 
-    protected final int id;
+    private int id;
     private static int nextId = 0;
     private LocalDate creationDate;
     private LocalDate expirationDate;
@@ -31,4 +31,7 @@ public abstract class Contract {
         this.contractOwner = contractOwner;
     }
 
+    public Contract() {
+
+    }
 }

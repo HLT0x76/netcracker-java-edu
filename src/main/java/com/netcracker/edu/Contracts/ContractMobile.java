@@ -35,4 +35,8 @@ public class ContractMobile extends Contract {
         this.internetAmount = internetAmount;
     }
 
+    public ContractMobile() {
+        super();
+    }
+
 }

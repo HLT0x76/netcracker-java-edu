@@ -27,6 +27,10 @@ public class ContractInternet extends Contract {
         super(creationDate, expirationDate, contractOwner);
         this.internetSpeed = internetSpeed;
     }
+
+    public ContractInternet() {
+        super();
+    }
 }
 
 

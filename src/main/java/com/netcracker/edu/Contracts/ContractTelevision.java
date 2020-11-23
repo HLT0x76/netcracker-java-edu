@@ -27,4 +27,8 @@ public class ContractTelevision extends Contract {
         super(creationDate, expirationDate, contractOwner);
         this.channelsPacket = channelsPacket;
     }
+
+    public ContractTelevision() {
+        super();
+    }
 }
