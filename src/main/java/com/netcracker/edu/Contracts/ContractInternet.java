@@ -11,10 +11,9 @@ import lombok.Getter;
  * Internet contract (extends {@link Contract})
  */
 @Getter
-@Setter
 public class ContractInternet extends Contract {
 
-    private int internetSpeed;
+    @Setter private int internetSpeed;
 
     /**
      * @param internetSpeed Contract internet speed (in MB/s)

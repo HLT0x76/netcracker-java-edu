@@ -30,6 +30,6 @@ public abstract class Contract {
     }
 
     public Contract() {
-
+        this.id = nextId++;
     }
 }
