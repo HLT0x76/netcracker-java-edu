@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import com.netcracker.edu.Customers.Customer;
+import com.netcracker.edu.Customers.Gender;
 import com.netcracker.edu.Sorters.BubbleSorter;
 import com.netcracker.edu.Sorters.ISorter;
 import org.junit.Before;
@@ -18,6 +20,7 @@ import com.netcracker.edu.Contracts.ContractTelevision;
 
 public class ContractsRepositoryTest {
 
+    private Customer owner = null;
     private ContractsRepository repo = null;
     private final LocalDate creation = LocalDate.now();
     private ContractTelevision conTv = null;
@@ -26,20 +29,28 @@ public class ContractsRepositoryTest {
 
     @Before
     public void setUp() {
+        owner = new Customer(
+                LocalDate.of(1995, 12, 12),
+                Gender.MALE,
+                "Ivan Ivanovich Ivanov",
+                "66-21-42314");
         conInt = new ContractInternet(
                 creation,
                 creation.plusYears(1),
-                25);
+                25,
+                owner);
         conTv = new ContractTelevision(
                 creation,
                 creation.plusYears(2),
-                "Ultra");
+                "Ultra",
+                owner);
         conMob = new ContractMobile(
                 creation,
                 creation.plusYears(3),
                 10,
                 300,
-                2048);
+                2048,
+                owner);
         repo = new ContractsRepository();
     }
 
