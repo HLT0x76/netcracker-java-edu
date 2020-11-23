@@ -2,6 +2,7 @@ package com.netcracker.edu.Contracts;
 
 import java.time.LocalDate;
 
+import com.netcracker.edu.Customers.Customer;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
@@ -21,8 +22,9 @@ public class ContractInternet extends Contract {
      */
     public ContractInternet(LocalDate creationDate,
                             LocalDate expirationDate,
-                            int internetSpeed) {
-        super(creationDate, expirationDate);
+                            int internetSpeed,
+                            Customer contractOwner) {
+        super(creationDate, expirationDate, contractOwner);
         this.internetSpeed = internetSpeed;
     }
 }

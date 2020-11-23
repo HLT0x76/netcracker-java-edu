@@ -2,6 +2,7 @@ package com.netcracker.edu.Contracts;
 
 import java.time.LocalDate;
 
+import com.netcracker.edu.Customers.Customer;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
@@ -26,10 +27,12 @@ public class ContractMobile extends Contract {
                           LocalDate expirationDate,
                           long smsAmount,
                           long minutesAmount,
-                          long internetAmount) {
-        super(creationDate, expirationDate);
+                          long internetAmount,
+                          Customer contractOwner) {
+        super(creationDate, expirationDate, contractOwner);
         this.smsAmount = smsAmount;
         this.minutesAmount = minutesAmount;
         this.internetAmount = internetAmount;
     }
+
 }

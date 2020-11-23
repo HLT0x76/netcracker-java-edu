@@ -2,6 +2,7 @@ package com.netcracker.edu.Contracts;
 
 import java.time.LocalDate;
 
+import com.netcracker.edu.Customers.Customer;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
@@ -21,8 +22,9 @@ public class ContractTelevision extends Contract {
      */
     public ContractTelevision(LocalDate creationDate,
                               LocalDate expirationDate,
-                              String channelsPacket) {
-        super(creationDate, expirationDate);
+                              String channelsPacket,
+                              Customer contractOwner) {
+        super(creationDate, expirationDate, contractOwner);
         this.channelsPacket = channelsPacket;
     }
 }
