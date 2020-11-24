@@ -110,16 +110,11 @@ public class ContractsRepository implements IRepository<Contract> {
         return newRepo;
     }
 
-
     /**
-     * @return length of {@code content} field
+     * @return length of {@code content} array
      */
     public int getLength() {
-        if (currentIndex == 0) {
-            return 0;
-        } else {
-            return this.content.length;
-        }
+        return currentIndex;
     }
 
 }
