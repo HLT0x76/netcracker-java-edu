@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.AccessLevel;
 
 /**
- *
+ * basic customer class implementation
  */
 @Getter
 @Setter(AccessLevel.PROTECTED)
