@@ -25,7 +25,10 @@ public class StringToContractConverter extends AbstractBeanField<Contract> {
             case "Television":
                 return new ContractTelevision();
             default:
-                throw new CsvConstraintViolationException();
+                StringBuilder errMsg = new StringBuilder();
+                errMsg.append("Unknown contract type: ");
+                errMsg.append(value);
+                throw new CsvConstraintViolationException(value, errMsg.toString());
         }
     }
 }
