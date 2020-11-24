@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public abstract class Contract {
 
-    private int id;
+    private final int id;
     @Setter private static int nextId = 0;
     @Setter private LocalDate creationDate;
     @Setter private LocalDate expirationDate;
