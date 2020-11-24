@@ -11,14 +11,15 @@ import com.opencsv.exceptions.CsvConstraintViolationException;
 public class StringToGenderConverter extends AbstractBeanField<Gender> {
 
     @Override
-    protected Gender convert(String value) throws CsvConstraintViolationException {
+    protected Gender convert(String value) {
         switch (value) {
             case "Male":
                 return Gender.MALE;
             case "Female":
                 return Gender.FEMALE;
             default:
-                throw new CsvConstraintViolationException();
+                // TODO logging
+                return null;
         }
     }
 }
