@@ -39,11 +39,11 @@ public class CSVRepositoryParser implements IParser<ContractsRepository, String>
 
             for (RepositoryCSV csvBean : list) {
                 Contract contract = csvBean.getContract();
-                String customerPassport = csvBean.getPassport();
+                String parsedCustomerPassport = csvBean.getPassport();
                 int i = 0;
                 while (repository.get(i).isPresent()) {
                     Customer existingCustomer = repository.get(i).get().getContractOwner();
-                    if (existingCustomer.getPassport().equals(customerPassport)){
+                    if (existingCustomer.getPassport().equals(parsedCustomerPassport)){
                         contract.setContractOwner(existingCustomer);
                         break;
                     }
@@ -54,11 +54,11 @@ public class CSVRepositoryParser implements IParser<ContractsRepository, String>
                 }
                 repository.add(contract);
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         return repository;
     }
+
 }
+
