@@ -1,9 +1,10 @@
 package com.netcracker.edu.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
-import com.opencsv.exceptions.CsvConstraintViolationException;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Converter which extends {@link AbstractBeanField} and implements
@@ -12,14 +13,12 @@ import java.time.LocalDate;
 public class StringToLocalDateConverter extends AbstractBeanField<LocalDate> {
 
     @Override
-    protected LocalDate convert(String value) throws CsvConstraintViolationException {
+    protected LocalDate convert(String value) {
         try {
-            int day = Integer.parseInt(value.split("-")[0]);
-            int month = Integer.parseInt(value.split("-")[1]);
-            int year = Integer.parseInt(value.split("-")[2]);
-            return LocalDate.of(year, month, day);
-        } catch (NumberFormatException n) {
-            throw new CsvConstraintViolationException();
+            return LocalDate.parse(value, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (DateTimeException e) {
+            // TODO logging
+            return null;
         }
 
     }
