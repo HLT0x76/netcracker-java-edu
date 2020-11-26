@@ -73,26 +73,16 @@ public class RepositoryCSV {
                 break;
             case "ContractMobile": {
                 String[] cad = contractAdditionalInfo.split(";");
-                try {
-                    long smsAmount = Long.parseLong(cad[0]);
-                    long minutesAmount = Long.parseLong(cad[1]);
-                    long internetAmount = Long.parseLong(cad[2]);
-                    ((ContractMobile) contract).setSmsAmount(smsAmount);
-                    ((ContractMobile) contract).setMinutesAmount(minutesAmount);
-                    ((ContractMobile) contract).setInternetAmount(internetAmount);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-                break;
+                long smsAmount = Long.parseLong(cad[0]);
+                long minutesAmount = Long.parseLong(cad[1]);
+                long internetAmount = Long.parseLong(cad[2]);
+                ((ContractMobile) contract).setSmsAmount(smsAmount);
+                ((ContractMobile) contract).setMinutesAmount(minutesAmount);
+                ((ContractMobile) contract).setInternetAmount(internetAmount);
             }
             case "ContractInternet":
-                try {
-                    int internetSpeed = Integer.parseInt(contractAdditionalInfo);
-                    ((ContractInternet) contract).setInternetSpeed(internetSpeed);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-                break;
+                int internetSpeed = Integer.parseInt(contractAdditionalInfo);
+                ((ContractInternet) contract).setInternetSpeed(internetSpeed);
         }
         return contract;
     }
