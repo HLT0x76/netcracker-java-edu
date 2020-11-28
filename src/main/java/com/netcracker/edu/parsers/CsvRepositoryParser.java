@@ -3,17 +3,31 @@ package com.netcracker.edu.parsers;
 import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.customers.Customer;
 import com.netcracker.edu.repository.ContractsRepository;
+import com.netcracker.edu.validators.ValidationReport;
+import com.netcracker.edu.validators.ValidationStatus;
+import com.netcracker.edu.validators.Validator;
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Objects;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 
 /**
  * Implements {@link IParser} interface
  * and provides csv parsing functionality by {@code parse} method.
  */
 public class CsvRepositoryParser implements IParser<ContractsRepository, String> {
+
+  private Validator<Contract> validator;
+  private static Logger LOGGER = LogManager.getLogger(CsvRepositoryParser.class);
+
+  public void setValidator(Validator<Contract> validator) {
+    this.validator = validator;
+  }
 
   /**
    * Uses {@link CsvToBeanBuilder} to build a valid {@link com.opencsv.bean.CsvToBean} parser
@@ -39,6 +53,7 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
       for (RepositoryCsv csvBean : list) {
         Contract contract = csvBean.getContract();
         String parsedCustomerPassport = csvBean.getPassport();
+
         int i = 0;
         while (repository.get(i).isPresent()) {
           Customer existingCustomer = repository.get(i).get().getContractOwner();
@@ -48,8 +63,22 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
           }
           i++;
         }
+
         if (Objects.isNull(contract.getContractOwner())) {
           contract.setContractOwner(csvBean.getCustomer());
+        }
+
+        if (validator != null) {
+          ValidationReport report = validator.check(contract);
+          if (report.getStatus() != ValidationStatus.OK) {
+            String msg = String.format(
+                    "[%s] %s: %s",
+                    report.getFailedField(),
+                    report.getInfoMessage(),
+                    report.getStatus());
+            LOGGER.trace("1");
+            continue;
+          }
         }
         repository.add(contract);
       }
