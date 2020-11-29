@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * CsvRepository class methods functionality tests.
+ * Validators classes functionality tests.
  */
 public class CsvRepositoryParserValidationTest {
 
