@@ -11,8 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Objects;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 
@@ -73,10 +73,10 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
           if (report.getStatus() != ValidationStatus.OK) {
             String msg = String.format(
                     "[%s] %s: %s",
+                    report.getStatus(),
                     report.getFailedField(),
-                    report.getInfoMessage(),
-                    report.getStatus());
-            LOGGER.trace("1");
+                    report.getInfoMessage());
+            LOGGER.info(msg);
             continue;
           }
         }
