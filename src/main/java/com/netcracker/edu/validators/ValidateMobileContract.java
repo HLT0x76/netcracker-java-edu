@@ -3,6 +3,9 @@ package com.netcracker.edu.validators;
 import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.contracts.ContractMobile;
 
+/**
+ * Extends {@link Validator}, checks internetSpeed field of {@link ContractMobile}.
+ */
 public class ValidateMobileContract extends Validator<Contract> {
 
   @Override
