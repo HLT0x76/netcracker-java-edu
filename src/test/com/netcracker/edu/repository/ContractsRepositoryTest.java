@@ -1,13 +1,11 @@
 package com.netcracker.edu.repository;
 
 import com.netcracker.edu.contracts.Contract;
-import com.netcracker.edu.contracts.ContractInternet;
-import com.netcracker.edu.contracts.ContractMobile;
-import com.netcracker.edu.contracts.ContractTelevision;
+import com.netcracker.edu.contracts.concrete.ContractInternet;
+import com.netcracker.edu.contracts.concrete.ContractMobile;
+import com.netcracker.edu.contracts.concrete.ContractTelevision;
 import com.netcracker.edu.customers.Customer;
 import com.netcracker.edu.customers.Gender;
-import com.netcracker.edu.sorters.BubbleSorter;
-import com.netcracker.edu.sorters.ISorter;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Optional;
@@ -103,8 +101,7 @@ public class ContractsRepositoryTest {
     repo.add(conTv);
     Comparator<Contract> byId =
             Comparator.comparingInt(Contract::getId);
-    ISorter<Contract> bubbleSorter = new BubbleSorter<>();
-    repo.sortBy(bubbleSorter, byId);
+    repo.sortBy(byId);
     Contract[] actual = repo.getContent();
     Contract[] expected = {conInt, conTv, conMob};
     Assert.assertArrayEquals(expected, actual);

@@ -21,7 +21,7 @@ public interface IRepository<T> {
 
   List<T> toList();
 
-  void sortBy(ISorter<T> sorter, Comparator<T> comparator);
+  void sortBy(Comparator<T> comparator);
 
   IRepository<T> searchBy(Predicate<T> condition);
 

@@ -1,6 +1,10 @@
 package com.netcracker.edu.repository;
 
 import com.netcracker.edu.contracts.Contract;
+import com.netcracker.edu.injections.Injector;
+import com.netcracker.edu.injections.annotations.CustomInjection;
+import com.netcracker.edu.injections.annotations.PackageConfig;
+import com.netcracker.edu.injections.exceptions.InjectionException;
 import com.netcracker.edu.sorters.ISorter;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -18,8 +22,22 @@ public class ContractsRepository implements IRepository<Contract> {
 
   private static final int INIT_SIZE = 1;
   private int currentIndex;
-  @Getter(AccessLevel.PROTECTED)
-  private Contract[] content;
+  @Getter(AccessLevel.PROTECTED) private Contract[] content;
+
+  @CustomInjection
+  @PackageConfig(packages = "com.netcracker.edu.sorters.bubble")
+  private ISorter<Contract> sorter;
+
+  /**
+   * Empty constructor with injection (see {@link Injector}).
+   */
+  public ContractsRepository() {
+    try {
+      Injector.inject(this);
+    } catch (InjectionException e) {
+      e.printStackTrace();
+    }
+  }
 
   /**
    * add method for ContractArray
@@ -98,12 +116,11 @@ public class ContractsRepository implements IRepository<Contract> {
    * {@code Comparator} generic and sorter,
    * which must implement {@link com.netcracker.edu.sorters.ISorter} interface.
    *
-   * @param sorter sorter, which implements {@link ISorter} interface
    * @param comparator generic comparator, that will set fields which will be used by sorter
    */
   @Override
-  public void sortBy(ISorter<Contract> sorter, Comparator<Contract> comparator) {
-    sorter.sort(content, comparator);
+  public void sortBy(Comparator<Contract> comparator) {
+    this.sorter.sort(content, comparator);
   }
 
   /**
