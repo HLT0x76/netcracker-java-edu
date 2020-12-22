@@ -1,5 +1,6 @@
 package com.netcracker.edu.sorters;
 
+import com.netcracker.edu.sorters.bubble.BubbleSorter;
 import java.util.Comparator;
 import org.junit.Assert;
 import org.junit.Test;

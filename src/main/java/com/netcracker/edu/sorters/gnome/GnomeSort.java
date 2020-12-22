@@ -1,5 +1,6 @@
-package com.netcracker.edu.sorters;
+package com.netcracker.edu.sorters.gnome;
 
+import com.netcracker.edu.sorters.ISorter;
 import java.util.Comparator;
 
 /**
