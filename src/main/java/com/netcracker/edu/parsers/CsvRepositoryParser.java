@@ -2,6 +2,10 @@ package com.netcracker.edu.parsers;
 
 import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.customers.Customer;
+import com.netcracker.edu.injections.Injector;
+import com.netcracker.edu.injections.annotations.CustomInjection;
+import com.netcracker.edu.injections.annotations.PackageConfig;
+import com.netcracker.edu.injections.exceptions.InjectionException;
 import com.netcracker.edu.repository.ContractsRepository;
 import com.netcracker.edu.validators.ValidationReport;
 import com.netcracker.edu.validators.ValidationStatus;
@@ -9,12 +13,11 @@ import com.netcracker.edu.validators.Validator;
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-
 
 /**
  * Implements {@link IParser} interface
@@ -22,11 +25,21 @@ import org.apache.log4j.Logger;
  */
 public class CsvRepositoryParser implements IParser<ContractsRepository, String> {
 
-  private Validator<Contract> validator;
   private static Logger LOGGER = LogManager.getLogger(CsvRepositoryParser.class);
 
-  public void setValidator(Validator<Contract> validator) {
-    this.validator = validator;
+  @CustomInjection
+  @PackageConfig(packages = "com.netcracker.edu.validators.concrete")
+  private List<Validator<Contract>> validators = new ArrayList<>();
+
+  /**
+   * Constructor with injection (see {@link Injector}).
+   */
+  public CsvRepositoryParser() {
+    try {
+      Injector.inject(this);
+    } catch (InjectionException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -35,7 +48,7 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
    * Implements additional control over an already existing {@link Customer} objects.
    *
    * @param repository {@link ContractsRepository} object for parsed data
-   * @param fileName filepath to csv file as string
+   * @param fileName   filepath to csv file as string
    * @return populated {@link ContractsRepository} object
    */
   @Override
@@ -68,25 +81,33 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
           contract.setContractOwner(csvBean.getCustomer());
         }
 
-        if (validator != null) {
-          ValidationReport report = validator.check(contract);
-          if (report.getStatus() != ValidationStatus.OK) {
-            String msg = String.format(
-                    "[%s] %s: %s",
-                    report.getStatus(),
-                    report.getFailedField(),
-                    report.getInfoMessage());
-            LOGGER.info(msg);
-            continue;
+        if (!validators.isEmpty()) {
+          List<ValidationReport> reports = new ArrayList<>();
+          for (Validator<Contract> validator : validators) {
+            reports.add(validator.check(contract));
           }
+          if (reports.stream().allMatch((s) -> s.getStatus().equals(ValidationStatus.OK))) {
+            repository.add(contract);
+          } else {
+            for (ValidationReport report : reports) {
+              if (!report.getStatus().equals(ValidationStatus.OK)) {
+                String msg = String.format(
+                        "[%s] %s: %s",
+                        report.getStatus(),
+                        report.getFailedField(),
+                        report.getInfoMessage());
+                LOGGER.info(msg);
+              }
+            }
+          }
+        } else {
+          repository.add(contract);
         }
-        repository.add(contract);
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
     return repository;
   }
-
 }
 

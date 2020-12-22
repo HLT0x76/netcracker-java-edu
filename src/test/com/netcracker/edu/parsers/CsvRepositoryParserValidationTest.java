@@ -1,8 +1,6 @@
 package com.netcracker.edu.parsers;
 
-import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.repository.ContractsRepository;
-import com.netcracker.edu.validators.*;
 import java.io.File;
 import java.util.Objects;
 import org.junit.Assert;
@@ -26,13 +24,6 @@ public class CsvRepositoryParserValidationTest {
   @Test
   public void parse() {
     CsvRepositoryParser parser = new CsvRepositoryParser();
-    Validator<Contract> validator = new ValidateDatesSanity();
-    validator.linkWith(new ValidateOwner())
-            .linkWith(new ValidateInternetContract())
-            .linkWith(new ValidateMobileContract())
-            .linkWith(new ValidateTelevisionContract());
-
-    parser.setValidator(validator);
     ContractsRepository repo = parser.parse(new ContractsRepository(), file.getPath());
 
     Assert.assertEquals(0, repo.getLength());

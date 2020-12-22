@@ -1,7 +1,7 @@
 package com.netcracker.edu.parsers;
 
 import com.netcracker.edu.contracts.Contract;
-import com.netcracker.edu.contracts.ContractMobile;
+import com.netcracker.edu.contracts.concrete.ContractMobile;
 import com.netcracker.edu.customers.Gender;
 import com.netcracker.edu.repository.ContractsRepository;
 import java.io.File;
