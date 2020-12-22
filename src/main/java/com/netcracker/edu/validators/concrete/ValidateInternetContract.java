@@ -1,7 +1,10 @@
-package com.netcracker.edu.validators;
+package com.netcracker.edu.validators.concrete;
 
 import com.netcracker.edu.contracts.Contract;
-import com.netcracker.edu.contracts.ContractInternet;
+import com.netcracker.edu.contracts.concrete.ContractInternet;
+import com.netcracker.edu.validators.ValidationReport;
+import com.netcracker.edu.validators.ValidationStatus;
+import com.netcracker.edu.validators.Validator;
 
 /**
  * Extends {@link Validator}, checks internetSpeed field of {@link ContractInternet}.
@@ -17,6 +20,6 @@ public class ValidateInternetContract extends Validator<Contract> {
                 ValidationStatus.WARNING);
       }
     }
-    return checkNext(contract);
+    return new ValidationReport(ValidationStatus.OK);
   }
 }

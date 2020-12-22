@@ -1,7 +1,10 @@
-package com.netcracker.edu.validators;
+package com.netcracker.edu.validators.concrete;
 
 import com.netcracker.edu.contracts.Contract;
-import com.netcracker.edu.contracts.ContractTelevision;
+import com.netcracker.edu.contracts.concrete.ContractTelevision;
+import com.netcracker.edu.validators.ValidationReport;
+import com.netcracker.edu.validators.ValidationStatus;
+import com.netcracker.edu.validators.Validator;
 
 /**
  * Extends {@link Validator}, checks channelPacket field of {@link ContractTelevision}.
@@ -18,6 +21,6 @@ public class ValidateTelevisionContract extends Validator<Contract> {
                 ValidationStatus.WARNING);
       }
     }
-    return checkNext(contract);
+    return new ValidationReport(ValidationStatus.OK);
   }
 }

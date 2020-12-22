@@ -1,6 +1,9 @@
-package com.netcracker.edu.validators;
+package com.netcracker.edu.validators.concrete;
 
 import com.netcracker.edu.contracts.Contract;
+import com.netcracker.edu.validators.ValidationReport;
+import com.netcracker.edu.validators.ValidationStatus;
+import com.netcracker.edu.validators.Validator;
 
 /**
  * Extends {@link Validator}, checks {@code creationDate} and {@code expirationDate}
@@ -30,6 +33,6 @@ public class ValidateDatesSanity extends Validator<Contract> {
               "creationDate & expirationDate",
               ValidationStatus.WARNING);
     }
-    return checkNext(contract);
+    return new ValidationReport(ValidationStatus.OK);
   }
 }

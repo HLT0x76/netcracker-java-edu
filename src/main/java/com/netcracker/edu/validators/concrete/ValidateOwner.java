@@ -1,7 +1,10 @@
-package com.netcracker.edu.validators;
+package com.netcracker.edu.validators.concrete;
 
 import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.customers.Customer;
+import com.netcracker.edu.validators.ValidationReport;
+import com.netcracker.edu.validators.ValidationStatus;
+import com.netcracker.edu.validators.Validator;
 import java.time.LocalDate;
 
 /**
@@ -32,6 +35,6 @@ public class ValidateOwner extends Validator<Contract> {
               "contractOwner.passport",
               ValidationStatus.WARNING);
     }
-    return checkNext(contract);
+    return new ValidationReport(ValidationStatus.OK);
   }
 }
