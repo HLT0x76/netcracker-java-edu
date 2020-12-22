@@ -1,9 +1,9 @@
 package com.netcracker.edu.parsers;
 
 import com.netcracker.edu.contracts.Contract;
-import com.netcracker.edu.contracts.ContractInternet;
-import com.netcracker.edu.contracts.ContractMobile;
-import com.netcracker.edu.contracts.ContractTelevision;
+import com.netcracker.edu.contracts.concrete.ContractInternet;
+import com.netcracker.edu.contracts.concrete.ContractMobile;
+import com.netcracker.edu.contracts.concrete.ContractTelevision;
 import com.netcracker.edu.converters.StringToContractConverter;
 import com.netcracker.edu.converters.StringToGenderConverter;
 import com.netcracker.edu.converters.StringToLocalDateConverter;
