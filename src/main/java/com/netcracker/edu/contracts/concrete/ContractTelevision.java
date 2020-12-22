@@ -1,5 +1,6 @@
-package com.netcracker.edu.contracts;
+package com.netcracker.edu.contracts.concrete;
 
+import com.netcracker.edu.contracts.Contract;
 import com.netcracker.edu.customers.Customer;
 import java.time.LocalDate;
 import lombok.Getter;
