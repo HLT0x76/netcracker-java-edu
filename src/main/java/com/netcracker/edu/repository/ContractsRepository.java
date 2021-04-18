@@ -1,28 +1,46 @@
 package com.netcracker.edu.repository;
 
 import com.netcracker.edu.contracts.Contract;
+import com.netcracker.edu.contracts.concrete.ContractInternet;
+import com.netcracker.edu.contracts.concrete.ContractMobile;
+import com.netcracker.edu.contracts.concrete.ContractTelevision;
 import com.netcracker.edu.injections.Injector;
 import com.netcracker.edu.injections.annotations.CustomInjection;
 import com.netcracker.edu.injections.annotations.PackageConfig;
 import com.netcracker.edu.injections.exceptions.InjectionException;
 import com.netcracker.edu.sorters.ISorter;
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
-import lombok.AccessLevel;
-import lombok.Getter;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * implements list-like functionality with methods such {@code add()}, {@code delete()} and etc.
  */
+@XmlRootElement(name = "contractRepository")
 public class ContractsRepository implements IRepository<Contract> {
 
   private static final int INIT_SIZE = 1;
   private int currentIndex;
-  @Getter(AccessLevel.PROTECTED) private Contract[] content;
+  @Getter(AccessLevel.PROTECTED)
+  private Contract[] content;
+  @XmlElementWrapper(name = "contractsList")
+  @XmlElements( {
+          @XmlElement( name = "contractMobile", type = ContractMobile.class),
+          @XmlElement( name = "contractTelevision", type = ContractTelevision.class),
+          @XmlElement( name = "contractInternet", type = ContractInternet.class)
+  } )
+  private List<Contract> contractList;
 
   @CustomInjection
   @PackageConfig(packages = "com.netcracker.edu.sorters.bubble")
@@ -58,6 +76,7 @@ public class ContractsRepository implements IRepository<Contract> {
     }
     content[currentIndex] = contract;
     currentIndex += 1;
+    this.contractList = Arrays.asList(content.clone());
   }
 
   /**
@@ -81,6 +100,7 @@ public class ContractsRepository implements IRepository<Contract> {
         break;
       }
     }
+    this.contractList = Arrays.asList(content.clone());
   }
 
   /**
@@ -108,7 +128,12 @@ public class ContractsRepository implements IRepository<Contract> {
    */
   @Override
   public List<Contract> toList() {
-    return Arrays.asList(content.clone());
+    this.contractList = Arrays.asList(content.clone());
+    return this.contractList;
+  }
+
+  public List<Contract> getContractList() {
+    return contractList;
   }
 
   /**
