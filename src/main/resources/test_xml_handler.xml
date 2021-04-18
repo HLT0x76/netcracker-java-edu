@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contractRepository>
+    <contractsList>
+        <contractMobile id="21">
+            <creationDate>12-12-2015</creationDate>
+            <expirationDate>12-12-2016</expirationDate>
+            <contractOwner id="8">
+                <age>25</age>
+                <dateOfBirth>15-06-1995</dateOfBirth>
+                <fullName>Иван Иванович Иванов</fullName>
+                <gender>MALE</gender>
+                <passport>60-25-42314</passport>
+            </contractOwner>
+            <smsAmount>300</smsAmount>
+            <minutesAmount>600</minutesAmount>
+            <internetAmount>4096</internetAmount>
+        </contractMobile>
+        <contractInternet id="18">
+            <creationDate>05-09-2012</creationDate>
+            <expirationDate>05-10-2022</expirationDate>
+            <contractOwner id="9">
+                <age>26</age>
+                <dateOfBirth>15-06-1994</dateOfBirth>
+                <fullName>Виктор Владимирович Хлебников</fullName>
+                <gender>MALE</gender>
+                <passport>40-14-53312</passport>
+            </contractOwner>
+            <internetSpeed>200</internetSpeed>
+        </contractInternet>
+        <contractTelevision id="20">
+            <creationDate>15-02-2002</creationDate>
+            <expirationDate>14-05-2004</expirationDate>
+            <contractOwner id="10">
+                <age>274</age>
+                <dateOfBirth>30-04-1746</dateOfBirth>
+                <fullName>Франсиско Хосе де Гойя</fullName>
+                <gender>MALE</gender>
+                <passport>11-33-67234</passport>
+            </contractOwner>
+            <channelsPacket>HorrorsPlus</channelsPacket>
+        </contractTelevision>
+        <contractMobile id="19">
+            <creationDate>25-06-2020</creationDate>
+            <expirationDate>04-08-2022</expirationDate>
+            <contractOwner id="11">
+                <age>81</age>
+                <dateOfBirth>11-03-1940</dateOfBirth>
+                <fullName>Томас Харрис</fullName>
+                <gender>MALE</gender>
+                <passport>60-15-42314</passport>
+            </contractOwner>
+            <smsAmount>10</smsAmount>
+            <minutesAmount>1000</minutesAmount>
+            <internetAmount>1024</internetAmount>
+        </contractMobile>
+        <contractTelevision id="22">
+            <creationDate>30-01-2004</creationDate>
+            <expirationDate>15-02-2009</expirationDate>
+            <contractOwner id="12">
+                <age>49</age>
+                <dateOfBirth>12-12-1971</dateOfBirth>
+                <fullName>Джастин Оборн</fullName>
+                <gender>MALE</gender>
+                <passport>66-62-95231</passport>
+            </contractOwner>
+            <channelsPacket>FamilyTV</channelsPacket>
+        </contractTelevision>
+        <contractInternet id="23">
+            <creationDate>30-01-2004</creationDate>
+            <expirationDate>15-02-2009</expirationDate>
+            <contractOwner id="13">
+                <age>205</age>
+                <dateOfBirth>10-12-1815</dateOfBirth>
+                <fullName>Ада Августа Лавлейс</fullName>
+                <gender>FEMALE</gender>
+                <passport>44-31-54231</passport>
+            </contractOwner>
+            <internetSpeed>200</internetSpeed>
+        </contractInternet>
+        <contractTelevision id="24">
+            <creationDate>14-03-2008</creationDate>
+            <expirationDate>14-04-2014</expirationDate>
+            <contractOwner id="14">
+                <age>36</age>
+                <dateOfBirth>05-06-1984</dateOfBirth>
+                <fullName>Алан Резник</fullName>
+                <gender>MALE</gender>
+                <passport>61-71-31426</passport>
+            </contractOwner>
+            <channelsPacket>AdultSwimPlus</channelsPacket>
+        </contractTelevision>
+        <contractInternet id="25">
+            <creationDate>25-05-2001</creationDate>
+            <expirationDate>25-05-2011</expirationDate>
+            <contractOwner id="15">
+                <age>30</age>
+                <dateOfBirth>11-07-1990</dateOfBirth>
+                <fullName>Ева Николаевна Морозова</fullName>
+                <gender>FEMALE</gender>
+                <passport>22-34-23226</passport>
+            </contractOwner>
+            <internetSpeed>200</internetSpeed>
+        </contractInternet>
+        <contractTelevision id="26">
+            <creationDate>12-03-2005</creationDate>
+            <expirationDate>12-02-2016</expirationDate>
+            <contractOwner id="16">
+                <age>30</age>
+                <dateOfBirth>11-07-1990</dateOfBirth>
+                <fullName>Ева Николаевна Морозова</fullName>
+                <gender>FEMALE</gender>
+                <passport>22-34-23226</passport>
+            </contractOwner>
+            <channelsPacket>CinemaHD</channelsPacket>
+        </contractTelevision>
+    </contractsList>
+</contractRepository>
