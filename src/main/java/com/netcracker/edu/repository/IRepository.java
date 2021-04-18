@@ -1,6 +1,5 @@
 package com.netcracker.edu.repository;
 
-import com.netcracker.edu.sorters.ISorter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;

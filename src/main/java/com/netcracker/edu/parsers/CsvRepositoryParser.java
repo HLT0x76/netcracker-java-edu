@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
  */
 public class CsvRepositoryParser implements IParser<ContractsRepository, String> {
 
-  private static Logger LOGGER = LogManager.getLogger(CsvRepositoryParser.class);
+  private static final Logger logger = LogManager.getLogger(CsvRepositoryParser.class);
 
   @CustomInjection
   @PackageConfig(packages = "com.netcracker.edu.validators.concrete")
@@ -96,7 +96,7 @@ public class CsvRepositoryParser implements IParser<ContractsRepository, String>
                         report.getStatus(),
                         report.getFailedField(),
                         report.getInfoMessage());
-                LOGGER.info(msg);
+                logger.info(msg);
               }
             }
           }
