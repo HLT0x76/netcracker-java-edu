@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import com.netcracker.edu.repositoryHandlers.xml.utils.DateAdapter;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -15,14 +16,26 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * basic contract fields (like creation/expiration date, id, etc).
  */
 @XmlTransient
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Contract {
 
+  @Id
   @XmlAttribute
+  @Column(name = "contract_id", nullable = false)
   private int id;
+
   @XmlTransient
   private static int nextId = 0;
+
+  @Column(name = "creation_date")
   private LocalDate creationDate;
+
+  @Column(name = "expiration_date")
   private LocalDate expirationDate;
+
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id")
   private Customer contractOwner;
 
   /**

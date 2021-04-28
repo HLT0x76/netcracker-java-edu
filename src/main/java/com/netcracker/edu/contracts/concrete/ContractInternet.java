@@ -5,8 +5,9 @@ import com.netcracker.edu.customers.Customer;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.time.LocalDate;
@@ -23,9 +24,12 @@ import java.time.LocalDate;
         "contractOwner",
         "internetSpeed"
 })
+@Entity
+@Table(name = "CONTRACTS_INTERNET")
 public class ContractInternet extends Contract {
 
   @Setter
+  @Column(name = "internet_speed")
   private int internetSpeed;
 
   /**

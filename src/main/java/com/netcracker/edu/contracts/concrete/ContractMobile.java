@@ -5,6 +5,9 @@ import com.netcracker.edu.customers.Customer;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,10 +29,17 @@ import java.time.LocalDate;
         "minutesAmount",
         "internetAmount"
 })
+@Entity
+@Table(name = "CONTRACTS_MOBILE")
 public class ContractMobile extends Contract {
 
+  @Column(name = "sms_amount")
   private long smsAmount;
+
+  @Column(name = "minutes_amount")
   private long minutesAmount;
+
+  @Column(name = "internet_amount")
   private long internetAmount;
 
   /**

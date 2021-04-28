@@ -2,10 +2,9 @@ package com.netcracker.edu.customers;
 
 import java.time.LocalDate;
 import java.time.Period;
-
 import com.netcracker.edu.repositoryHandlers.xml.utils.DateAdapter;
 import com.netcracker.edu.repositoryHandlers.xml.utils.GenderAdapter;
-
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,15 +14,28 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * Basic customer class implementation.
  */
 @XmlRootElement(name = "customer")
+@Entity
+@Table(name = "customers")
 public class Customer {
 
   @XmlAttribute
+  @Id
+  @Column(name = "customer_id", nullable = false)
   private int id;
   private static int nextId = 0;
+
+  @Column(name = "gender")
   private Gender gender;
+
+  @Column(name = "dob")
   private LocalDate dateOfBirth;
+
   private int age;
+
+  @Column(name = "full_name")
   private String fullName;
+
+  @Column(name = "passport_code")
   private String passport;
 
   /**
