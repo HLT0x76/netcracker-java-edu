@@ -5,13 +5,12 @@ import com.netcracker.edu.repository.ContractsRepository;
 import javax.management.InvalidAttributeValueException;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.util.Set;
 
 /**
  * Handler interface for JAXB and JDBC mappers.
- *
- * @param <T> resource type
  */
-public interface IHandler<T> {
-  void exportContractRepository(ContractsRepository repository, T resource) throws JAXBException, InvalidAttributeValueException;
-  ContractsRepository importContractRepository(T resource) throws FileNotFoundException, JAXBException;
+public interface IHandler {
+  void exportContractRepository(ContractsRepository repository) throws JAXBException, InvalidAttributeValueException;
+  ContractsRepository importContractRepository(Set<Integer> contractsIds) throws FileNotFoundException, JAXBException;
 }
