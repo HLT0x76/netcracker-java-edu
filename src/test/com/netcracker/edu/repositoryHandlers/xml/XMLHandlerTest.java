@@ -11,8 +11,7 @@ import javax.management.InvalidAttributeValueException;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class XMLHandlerTest {
 
@@ -36,15 +35,18 @@ public class XMLHandlerTest {
 
   @Test
   public void exportContractRepository() throws JAXBException, InvalidAttributeValueException {
-    xmlHandler = new XMLHandler();
-    xmlHandler.exportContractRepository(repository, xmlFile);
+    xmlHandler = new XMLHandler(xmlFile);
+    xmlHandler.exportContractRepository(repository);
     Assert.assertNotEquals(0, xmlFile.length());
   }
 
   @Test
   public void importContractRepository() throws JAXBException, FileNotFoundException {
-    xmlHandler = new XMLHandler();
-    List<Contract> actual = xmlHandler.importContractRepository(xmlFile).getContractList();
+    xmlHandler = new XMLHandler(xmlFile);
+    Set<Integer> contractIds = new HashSet<>();
+    repository.toList().forEach(contract -> contractIds.add(contract.getId()));
+
+    List<Contract> actual = xmlHandler.importContractRepository(contractIds).getContractList();
     List<Contract> expected = repository.getContractList();
     Assert.assertEquals(actual.size(), expected.size());
     for(int i = 0; i < actual.size(); i++) {
